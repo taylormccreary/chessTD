@@ -55,7 +55,7 @@ function zdisplayInitialPairings(round, sec) {
     }
 }
 
-function zdisplayPairings(round) {
+function displayPairings(round) {
     var i;
     for (i = 0; i < round.length; i++) {
         var myTable = document.getElementById("pairings");
@@ -66,7 +66,7 @@ function zdisplayPairings(round) {
     }
 }
 
-function zrandResults(round, sec) {
+function randResults(round, sec) {
     var j;
     for (j = 0; j < round.length; j++) {
         var res = Math.round(Math.random());
@@ -83,7 +83,7 @@ function zrandResults(round, sec) {
     }
 }
 
-function zdisplayResults(round, sec) {
+function displayResults(round, sec) {
     var i;
     var myTable = document.getElementById("pairings");
     for (i = 1; i < myTable.rows.length; i++) {

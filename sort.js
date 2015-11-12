@@ -1,4 +1,4 @@
-/// <reference path="./lib/ramda.js" />
+// <reference path="./lib/ramda.js" />
 
 function simplePair(section) {
     return R.zip(R.take(section.length / 2, section), R.takeLast(section.length / 2, section));

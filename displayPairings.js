@@ -3,6 +3,19 @@
 var firstRound = true;
 
 $(document).ready(function () {
+    alert("hey there");
+    var open = new Section ("Open", myPlayers);
+    alert("new section called open created");
+    open.reducePrefLists();
+    open.phase2();
+    alert(open.playerList[0].prefList + "\n" +
+    open.playerList[1].prefList + "\n" +
+    open.playerList[2].prefList + "\n" +
+    open.playerList[3].prefList + "\n" +
+    open.playerList[4].prefList + "\n" +
+    open.playerList[5].prefList)
+    
+
 
     $("#randResults").click(function () {
         var pairedSec = sortByRating(section1);
@@ -10,8 +23,7 @@ $(document).ready(function () {
         if (firstRound) {
             displayInitialPairings(round, pairedSec);
         } else {
-            randResults(round, pairedSec);  
-            //alert(section1[0].opponents);
+            randResults(round, pairedSec);         
             displayResults(round, pairedSec);
             displayPairings(round);
         }
@@ -24,7 +36,6 @@ $(document).ready(function () {
             displayInitialPairings(round2, pairedSec2);
         } else {
             randResults(round2, pairedSec2);
-            //alert(section1[0].opponents);
             displayResults(round2, pairedSec2);
             displayPairings(round2);
         }

@@ -36,7 +36,7 @@ $(document).ready(function () {
 
 })
 
-function zdisplayInitialPairings(round, sec) {
+function displayInitialPairings(round, sec) {
     firstRound = false;
     var i;
     for (i = 0; i < round.length; i++) {

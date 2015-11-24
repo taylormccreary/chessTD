@@ -3,9 +3,8 @@
 var firstRound = true;
 
 $(document).ready(function () {
-    alert("hey there");
     var open = new Section ("Open", myPlayers);
-    alert("new section called open created");
+    alert("new section called " + open.name + " created");
     open.reducePrefLists();
     open.phase2();
     alert(open.playerList[0].prefList + "\n" +

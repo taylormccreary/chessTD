@@ -3,10 +3,16 @@ function Section (name, playersJSON){
 	this.playerList = playersJSON;
 }
 
-Section.prototype.reducePrefLists = function(){
-    for (var i = 0; i < this.playerList.length; i++){
-      this.propose(this.playerList[i], this.playerList[this.playerList[i].prefList[0]]);
-    }	
+Section.prototype.proposeToFirstChoice = function (player) {
+    var firstChoice = this.playerList[player.prefList[0]];
+    this.propose(player, firstChoice);
+}
+
+Section.prototype.reducePrefLists = function () {
+    R.forEach(this.proposeToFirstChoice.bind(this), this.playerList);
+    //for (var i = 0; i < this.playerList.length; i++) {
+    //    this.proposeToFirstChoice(this.playerList[i]);
+    //}
 }
 
 Section.prototype.removeAFromBPrefList = function(A,B){

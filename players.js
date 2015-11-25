@@ -36,3 +36,22 @@ var myPlayers = [
     { "name": "Aronian", "rating": 2784, "rounds": [0], "opponents": [], "score": 0, "prefList": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15], "currProp": -1 },
     { "name": "Ding", "rating": 2782, "rounds": [0], "opponents": [], "score": 0, "prefList": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "currProp": -1 }
 ]
+
+var testSec = [
+    { "name": "Carlsen", "score": 1 },
+    { "name": "Nakamura", "score": 2 },
+    { "name": "Topalov", "score": 2 },
+    { "name": "Kramnik", "score": 3 },
+    { "name": "Grischuk", "score": 1 },
+    { "name": "Karjakin", "score": 0 },
+    { "name": "So", "score": 0 },
+    { "name": "Vachier-Lagrave", "score": 0 },
+    { "name": "Tomashevsky", "score": 2 },
+    { "name": "Li", "score": 2 },
+    { "name": "Jakovenko", "score": 3 },
+    { "name": "Anand", "score": 0 },
+    { "name": "Giri", "score": 0 },
+    { "name": "Caruana", "score": 0 },
+    { "name": "Aronian", "score": 4 },
+    { "name": "Ding", "score": 4 }
+]

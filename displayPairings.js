@@ -3,16 +3,18 @@
 var firstRound = true;
 
 $(document).ready(function () {
-    var open = new Section ("Open", myPlayers);
-    alert("new section called " + open.name + " created");
-    open.reducePrefLists();
-    open.phase2();
-    alert(open.playerList[0].prefList + "\n" +
-    open.playerList[1].prefList + "\n" +
-    open.playerList[2].prefList + "\n" +
-    open.playerList[3].prefList + "\n" +
-    open.playerList[4].prefList + "\n" +
-    open.playerList[5].prefList)
+    testSec = sortByPointsThenRating(testSec);
+    alert(genScoreSecs(testSec)[0]);
+    //var open = new Section ("Open", myPlayers);
+    //alert("new section called " + open.name + " created");
+    //open.reducePrefLists();
+    //open.phase2();
+    //alert(open.playerList[0].prefList + "\n" +
+    //open.playerList[1].prefList + "\n" +
+    //open.playerList[2].prefList + "\n" +
+    //open.playerList[3].prefList + "\n" +
+    //open.playerList[4].prefList + "\n" +
+    //open.playerList[5].prefList)
     
 
 

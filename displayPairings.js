@@ -4,7 +4,8 @@ var firstRound = true;
 
 $(document).ready(function () {
     testSec = sortByPointsThenRating(testSec);
-    alert(genScoreSecs(testSec)[0]);
+    //console.log(genScoreSecs(testSec));
+    //alert(genScoreSecs(testSec)[0]);
     //var open = new Section ("Open", myPlayers);
     //alert("new section called " + open.name + " created");
     //open.reducePrefLists();

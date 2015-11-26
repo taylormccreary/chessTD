@@ -15,22 +15,22 @@ Section.prototype.reducePrefLists = function () {
     //}
 }
 
-Section.prototype.removeAFromBPrefList = function(A,B){
-	var foundSpot = R.indexOf(R.indexOf(A,this.playerList),B.prefList);
+Section.prototype.removeAFromBPrefList = function(playerA,playerB){
+	var foundSpot = R.indexOf(R.indexOf(playerA,this.playerList),playerB.prefList);
     if(foundSpot > -1){
-    B.prefList = R.remove(foundSpot,1,B.prefList);
+    playerB.prefList = R.remove(foundSpot,1,playerB.prefList);
     }
 }
 
-Section.prototype.dropBottomPrefs = function(A, newLastIndex){
-	if(newLastIndex == A.prefList.length-1){
+Section.prototype.dropBottomPrefs = function(playerA, newLastIndex){
+	if(newLastIndex == playerA.prefList.length-1){
       return;
     }
     var i;
-    var originalLength = A.prefList.length;
+    var originalLength = playerA.prefList.length;
     for(i = newLastIndex + 1; i<originalLength; i++){
-      this.removeAFromBPrefList(A,this.playerList[A.prefList[A.prefList.length-1]]);
-      this.removeAFromBPrefList(this.playerList[A.prefList[A.prefList.length-1]],A);
+      this.removeAFromBPrefList(playerA,this.playerList[playerA.prefList[playerA.prefList.length-1]]);
+      this.removeAFromBPrefList(this.playerList[playerA.prefList[playerA.prefList.length-1]],playerA);
     }
 }
 
@@ -72,15 +72,15 @@ Section.prototype.eliminatePairs = function(){
   }
 }
 
-Section.prototype.removeThisPair = function(A,B){
+Section.prototype.removeThisPair = function(playerA,playerB){
   for(var i = 0; i <this.playerList.length; i++){
-    if(A == this.playerList[i]){
-      A.prefList = [R.indexOf(B,this.playerList)];
-    }else if(B == this.playerList[i]){
-      B.prefList = [R.indexOf(A,this.playerList)];
+    if(playerA == this.playerList[i]){
+      playerA.prefList = [R.indexOf(playerB,this.playerList)];
+    }else if(playerB == this.playerList[i]){
+      playerB.prefList = [R.indexOf(playerA,this.playerList)];
     }else{
-      this.removeAFromBPrefList(A,this.playerList[i]);
-      this.removeAFromBPrefList(B,this.playerList[i]);
+      this.removeAFromBPrefList(playerA,this.playerList[i]);
+      this.removeAFromBPrefList(playerB,this.playerList[i]);
     }
   }
 }

@@ -3,13 +3,19 @@
 var firstRound = true;
 
 $(document).ready(function () {
-    testSec = sortByPointsThenRating(testSec);
+    //testSec = sortByPointsThenRating(testSec);
     //console.log(genScoreSecs(testSec));
     //alert(genScoreSecs(testSec)[0]);
-    //var open = new Section ("Open", myPlayers);
-    //alert("new section called " + open.name + " created");
-    //open.reducePrefLists();
-    //open.phase2();
+    var open = new Section("Open", myPlayers);
+    console.log(open);
+    open.genAllPrefLists();
+    open.reducePrefLists();
+    open.phase2();
+    console.log(open);
+    open.genAllPrefLists();
+    open.reducePrefLists();
+    open.phase2();
+    console.log(open);
     //alert(open.playerList[0].prefList + "\n" +
     //open.playerList[1].prefList + "\n" +
     //open.playerList[2].prefList + "\n" +

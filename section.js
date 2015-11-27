@@ -1,6 +1,6 @@
-function Section (name, playersJSON){
-	this.name = name;
-	this.playerList = playersJSON;
+function Section(name, playersJSON) {
+    this.name = name;
+    this.playerList = playersJSON;
 }
 
 Section.prototype.proposeToFirstChoice = function (player) {
@@ -15,88 +15,91 @@ Section.prototype.reducePrefLists = function () {
     //}
 }
 
-Section.prototype.removeAFromBPrefList = function(playerA,playerB){
-	var foundSpot = R.indexOf(R.indexOf(playerA,this.playerList),playerB.prefList);
-    if(foundSpot > -1){
-    playerB.prefList = R.remove(foundSpot,1,playerB.prefList);
+Section.prototype.removeAFromBPrefList = function (playerA, playerB) {
+    var foundSpot = R.indexOf(R.indexOf(playerA, this.playerList), playerB.prefList);
+    if (foundSpot > -1) {
+        playerB.prefList = R.remove(foundSpot, 1, playerB.prefList);
     }
 }
 
-Section.prototype.dropBottomPrefs = function(playerA, newLastIndex){
-	if(newLastIndex == playerA.prefList.length-1){
-      return;
+Section.prototype.dropBottomPrefs = function (playerA, newLastIndex) {
+    if (newLastIndex === playerA.prefList.length - 1) {
+        return;
     }
     var i;
     var originalLength = playerA.prefList.length;
-    for(i = newLastIndex + 1; i<originalLength; i++){
-      this.removeAFromBPrefList(playerA,this.playerList[playerA.prefList[playerA.prefList.length-1]]);
-      this.removeAFromBPrefList(this.playerList[playerA.prefList[playerA.prefList.length-1]],playerA);
+    for (i = newLastIndex + 1; i < originalLength; i++) {
+        this.removeAFromBPrefList(playerA, this.playerList[playerA.prefList[playerA.prefList.length - 1]]);
+        this.removeAFromBPrefList(this.playerList[playerA.prefList[playerA.prefList.length - 1]], playerA);
     }
 }
 
-Section.prototype.propose = function(proposer, recipient){
-	var foundSpot = R.indexOf(R.indexOf(proposer,this.playerList),recipient.prefList);
-    if (foundSpot > -1){
-      if(recipient.currProp !== -1){
-        this.removeAFromBPrefList(recipient,this.playerList[recipient.currProp]);
-      }
-      recipient.currProp = R.indexOf(proposer, this.playerList);
-      this.dropBottomPrefs(recipient,foundSpot);
-    }else{
-      this.removeAFromBPrefList(recipient,proposer);
-      if(proposer.prefList.length>0){
-        this.propose(proposer, this.playerList[proposer.prefList[0]]);
-      }else{
-        alert("no stable pairing");
-      }
-      
+Section.prototype.propose = function (proposer, recipient) {
+    var foundSpot = R.indexOf(R.indexOf(proposer, this.playerList), recipient.prefList);
+    if (foundSpot > -1) {
+        if (recipient.currProp !== -1) {
+            this.removeAFromBPrefList(recipient, this.playerList[recipient.currProp]);
+        }
+        recipient.currProp = R.indexOf(proposer, this.playerList);
+        this.dropBottomPrefs(recipient, foundSpot);
+    } else {
+        this.removeAFromBPrefList(recipient, proposer);
+        if (proposer.prefList.length > 0) {
+            this.propose(proposer, this.playerList[proposer.prefList[0]]);
+        } else {
+            alert("no stable pairing");
+        }
+
     }
 }
 
-Section.prototype.phase2 = function(){
-  var i;
-  this.eliminatePairs(this.playerList);
-  for(i = 0; i<this.playerList.length; i++){
-    if(this.playerList[i].prefList.length>1){
-      this.eliminate1rotation(i, this.playerList);
-      this.phase2(this.playerList);
+Section.prototype.phase2 = function () {
+    var i;
+    this.eliminatePairs(this.playerList);
+    for (i = 0; i < this.playerList.length; i++) {
+        if (this.playerList[i].prefList.length > 1) {
+            this.eliminate1rotation(i, this.playerList);
+            this.phase2(this.playerList);
+        }
     }
-  }
+    for (var j = 0; j < this.playerList.length; j++) {
+        this.playerList[j].opponents[this.playerList[j].opponents.length] = this.playerList[j].prefList[0];
+    }
 }
 
-Section.prototype.eliminatePairs = function(){
-  for (var i = 0; i < this.playerList.length; i++){
-    if (this.playerList[i].prefList.length == 1){
-      this.removeThisPair(this.playerList[i],this.playerList[this.playerList[i].prefList[0]],this.playerList);
+Section.prototype.eliminatePairs = function () {
+    for (var i = 0; i < this.playerList.length; i++) {
+        if (this.playerList[i].prefList.length == 1) {
+            this.removeThisPair(this.playerList[i], this.playerList[this.playerList[i].prefList[0]], this.playerList);
+        }
     }
-  }
 }
 
-Section.prototype.removeThisPair = function(playerA,playerB){
-  for(var i = 0; i <this.playerList.length; i++){
-    if(playerA == this.playerList[i]){
-      playerA.prefList = [R.indexOf(playerB,this.playerList)];
-    }else if(playerB == this.playerList[i]){
-      playerB.prefList = [R.indexOf(playerA,this.playerList)];
-    }else{
-      this.removeAFromBPrefList(playerA,this.playerList[i]);
-      this.removeAFromBPrefList(playerB,this.playerList[i]);
+Section.prototype.removeThisPair = function (playerA, playerB) {
+    for (var i = 0; i < this.playerList.length; i++) {
+        if (playerA == this.playerList[i]) {
+            playerA.prefList = [R.indexOf(playerB, this.playerList)];
+        } else if (playerB == this.playerList[i]) {
+            playerB.prefList = [R.indexOf(playerA, this.playerList)];
+        } else {
+            this.removeAFromBPrefList(playerA, this.playerList[i]);
+            this.removeAFromBPrefList(playerB, this.playerList[i]);
+        }
     }
-  }
 }
 
-Section.prototype.eliminate1rotation = function(start){
-  this.removeAFromBPrefList(this.playerList[start], this.playerList[this.playerList[start].prefList[0]]);
-  this.removeAFromBPrefList(this.playerList[this.playerList[start].prefList[0]], this.playerList[start]);
-  var isFirst = false;
-  var newStart= 0;
-  for (var j = 0; j<this.playerList.length; j++){
-    if (j !== start && this.playerList[j].prefList[0] === this.playerList[start].prefList[0]){
-      isFirst = true;
-      newStart = j;
+Section.prototype.eliminate1rotation = function (start) {
+    this.removeAFromBPrefList(this.playerList[start], this.playerList[this.playerList[start].prefList[0]]);
+    this.removeAFromBPrefList(this.playerList[this.playerList[start].prefList[0]], this.playerList[start]);
+    var isFirst = false;
+    var newStart = 0;
+    for (var j = 0; j < this.playerList.length; j++) {
+        if (j !== start && this.playerList[j].prefList[0] === this.playerList[start].prefList[0]) {
+            isFirst = true;
+            newStart = j;
+        }
     }
-  }
-  if(isFirst){
-    this.eliminate1rotation(newStart, this.playerList);
-  }
+    if (isFirst) {
+        this.eliminate1rotation(newStart, this.playerList);
+    }
 }

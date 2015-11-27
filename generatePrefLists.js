@@ -56,7 +56,7 @@ Section.prototype.genScoreSecs = function (section) {
     var bigRes = [];
     for (k = 0; k < 6; k++) {
         var res = [];
-        var scoreI = R.filter(R.propEq('score', k), section);
+        var scoreI = R.filter(R.propEq("score", k), section);
         var i;
         for (i = 0; i < scoreI.length; i++) {
             res.push(R.indexOf(scoreI[i], section));
@@ -66,11 +66,11 @@ Section.prototype.genScoreSecs = function (section) {
     return bigRes;
 }
 
-Section.prototype.genIndPrefList = function (section, index) {
-    var player = section[index];
-    var scoreSections = this.genScoreSecs(section);
+Section.prototype.genIndPrefList = function (index) {
+    var player = this.playerList[index];
+    var scoreSections = this.genScoreSecs(this.playerList);
     var score = player.score;
-    var n = R.indexOf(R.indexOf(player, section), scoreSections[score]);
+    var n = R.indexOf(R.indexOf(player, this.playerList), scoreSections[score]);
     var prefList = this.sortScoreSection(n, scoreSections[score]);
     var i;
     for (i = score + 1; i < scoreSections.length; i++) {
@@ -79,5 +79,21 @@ Section.prototype.genIndPrefList = function (section, index) {
     for (i = score - 1; i >= 0; i--) {
         prefList.push(scoreSections[i]);
     }
-    return R.flatten(prefList);
+
+
+
+    this.playerList[index].prefList = R.flatten(prefList);
+}
+
+Section.prototype.genAllPrefLists = function() {
+    for (var i = 0; i < this.playerList.length; i++) {
+        this.genIndPrefList(i);
+        this.removeAFromBPrefList(this.playerList[i], this.playerList[i]);
+    }
+
+    for (var j = 0; j < this.playerList.length; j++) {
+        for (var k = 0; k < this.playerList[j].opponents.length; k++) {
+            this.removeAFromBPrefList(this.playerList[this.playerList[j].opponents[k]], this.playerList[j]);
+        }
+    }
 }

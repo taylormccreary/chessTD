@@ -1,5 +1,5 @@
 #result {
-    //background-color: #FED6B0;
+    /*background-color: #FED6B0;*/
 }
 
 #pairings {
@@ -9,15 +9,15 @@
 
 #pairRound, #randResults {
     color: white;
-    //background-color: #FED6B0;
-    //background-color: #FAA04B;
+    /*background-color: #FED6B0;*/
+    /*background-color: #FAA04B;*/
     background-color: #D86C06;
     border: 1px solid #D86C06;
-    //font: 20px Arial;
+    /*font: 20px Arial;*/
 }
 
 #title {
     font-size: 40px;
-    //color: #FC8718;
+    /*color: #FC8718;*/
     color: #D86C06;
 }

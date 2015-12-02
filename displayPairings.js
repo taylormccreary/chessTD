@@ -1,17 +1,19 @@
 
 
 var firstRound = true;
-    var open = new Section("Open", myPlayers);
-    console.log(open);
+var open = new Section("Open", myPlayers);
+console.log(open);
 $(document).ready(function () {
+
+
 
     //testSec = sortByPointsThenRating(testSec);
     //console.log(genScoreSecs(testSec));
     //alert(genScoreSecs(testSec)[0]);
 
-    //open.genAllPrefLists();
-    //open.reducePrefLists();
-    //open.phase2();
+    open.genAllPrefLists();
+    open.reducePrefLists();
+    var openRound = open.phase2();
     //console.log(open);
     //open.genAllPrefLists();
     //open.reducePrefLists();
@@ -19,24 +21,28 @@ $(document).ready(function () {
     //console.log(open);
 
 
-        var pairedSec = sortByRating(section1);
-        var round = simplePair(pairedSec);
-            displayInitialPairings(round, pairedSec);
+    var pairedSec = sortByRating(section1);
+    var round = simplePair(pairedSec);
+    //displayInitialPairings(round, pairedSec);
+
+    $("#pairings").loadTemplate($("#template"),
+        openRound);
+
 
     $("#randResults").click(function () {
 
-            randResults(round, pairedSec);
-            displayResults(round, pairedSec);
-            displayPairings(round);
-        
+        randResults(round, pairedSec);
+        displayResults(round, pairedSec);
+        displayPairings(round);
+
     });
 
     $("#pairRound").click(function () {
         var pairedSec2 = sortByPointsThenRating(section1);
         var round2 = simplePair(pairedSec2);
-            randResults(round2, pairedSec2);
-            displayResults(round2, pairedSec2);
-            displayPairings(round2);
+        randResults(round2, pairedSec2);
+        displayResults(round2, pairedSec2);
+        displayPairings(round2);
 
     });
 
@@ -51,7 +57,7 @@ function displayInitialPairings(round, sec) {
         var myTable = document.getElementById("pairings");
 
         var row = myTable.insertRow(myTable.rows.length);
-        row.insertCell(0).innerHTML = myTable.rows.length-1;
+        row.insertCell(0).innerHTML = myTable.rows.length - 1;
         row.insertCell(1).innerHTML = round[i][0].number;
         row.insertCell(2).innerHTML = round[i][0].name + " (" + round[i][0].rating + ")";
         row.insertCell(3).innerHTML = round[i][0].score;

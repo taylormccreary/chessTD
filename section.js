@@ -78,10 +78,16 @@ Section.prototype.recPhase2 = function () {
 Section.prototype.phase2 = function () {
 
     this.recPhase2();
-
+    var pairings = [];
     for (var j = 0; j < this.playerList.length; j++) {
-        this.playerList[j].opponents[this.playerList[j].opponents.length] = this.playerList[j].prefList[0];
+        //this.playerList[j].opponents[this.playerList[j].opponents.length] = this.playerList[j].prefList[0];
+        this.playerList[j].opponents.push(this.playerList[j].prefList[0]);
+        if (j < this.playerList[j].prefList[0]) {
+            var pair = new Pairing(this.playerList[j], this.playerList[this.playerList[j].prefList[0]]);
+            pairings.push(pair);
+        }
     }
+    return pairings;
 }
 
 Section.prototype.eliminatePairs = function () {

@@ -57,6 +57,9 @@ var myPlayers = [
     { "name": "Ding", "rating": 2782, "rounds": [0], "opponents": [], "score": 0, "prefList": [], "currProp": -1, "number": 15 }
 ];
 
+for (var i = 0; i < myPlayers.length; i++) {
+    myPlayers[i].seed = R.indexOf(myPlayers[i], myPlayers) + 1;
+}
 
 //var myPlayers = [
 //    { "name": "Carlsen", "rating": 2850, "rounds": [0], "opponents": [], "score": 5, "prefList": [], "currProp": -1, "number": 0 },

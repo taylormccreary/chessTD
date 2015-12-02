@@ -11,6 +11,9 @@ Section.prototype.proposeToFirstChoice = function (player) {
 
 Section.prototype.reducePrefLists = function () {
     R.forEach(this.proposeToFirstChoice.bind(this), this.playerList);
+    for (var i = 0; i < this.playerList.length; i++) {
+        this.playerList[i].currProp = -1;
+    }
 }
 
 Section.prototype.removeAFromBPrefList = function (playerA, playerB) {
@@ -130,5 +133,14 @@ Section.prototype.eliminate1rotation = function (start) {
 
     if (isFirst) {
         this.eliminate1rotation(newStart, this.playerList);
+    }
+}
+
+Section.prototype.calculateResults = function (roundWithResults) {
+    for (var i = 0; i < roundWithResults.length; i++) {
+        var wPlayer = R.indexOf(roundWithResults[i].white, this.playerList);
+        this.playerList[wPlayer].score += roundWithResults[i].wRes;
+        var bPlayer = R.indexOf(roundWithResults[i].black, this.playerList);
+        this.playerList[bPlayer].score += roundWithResults[i].bRes;
     }
 }

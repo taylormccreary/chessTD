@@ -58,6 +58,7 @@ Section.prototype.sortScoreSection = function (n, scoreSection) {
 
 Section.prototype.genScoreSecs = function () {
     var bigRes = [];
+    //THIS MUST BE CHANGED-k must be less than the maximum score!
     for (var k = 0; k < 6; k++) {
         var res = [];
         var scoreI = R.filter(R.propEq("score", k), this.playerList);

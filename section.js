@@ -94,7 +94,7 @@ Section.prototype.recursivePhase2 = function () {
 
 Section.prototype.phase2 = function () {
 
-    this.recPhase2();
+    this.recursivePhase2();
 
     var pairings = [];
 
